@@ -1,0 +1,15 @@
+---
+  - name: Install the Python MySQLB module
+    pip: name=MySQL-python
+
+  - name: install package
+    apt: name={{ item }} state=present
+    with_items:
+    - mariadb-server
+ 
+  - name: Create database user
+    mysql_user: user=temidb password=temitos2 priv=*.*:ALL state=present
+
+  - name: Create database
+    mysql_db: db=temitos2 state=present
+
